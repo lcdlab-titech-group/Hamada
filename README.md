@@ -8,7 +8,7 @@
 config.iniはこのスクリプトの設定ファイルです。
 
 <h3>入力例</h3>
-「python getSensorData_402.py」でデータ取得（取得値は表示されない）
+「python getSensorData_402.py」でデータ取得（取得値は表示されない）\n
 「python getSensorData_402.py -v」でデバッグモードになり取得値をリアルタイム表示
   
 <h2>grip_vel.py</h2>
