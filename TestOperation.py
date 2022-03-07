@@ -8,6 +8,7 @@ class TestOperation():
         self.ser.baoudrate = baudrate
         self.ser.timeout = None
     
+    #COMポート番号は繋ぐたびに代わるので、スクリプト実行のたびに探索
     def select_port(self):
         ports = list_ports.comports() 
         devices = [info.device for info in ports]
