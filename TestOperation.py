@@ -7,6 +7,7 @@ class TestOperation():
         self.ser = serial.Serial()
         self.ser.baoudrate = baudrate
         self.ser.timeout = None
+        self.ser_port= self.select_port()
     
     #COMポート番号は繋ぐたびに代わるので、スクリプト実行のたびに探索
     def select_port(self):
@@ -40,13 +41,13 @@ class TestOperation():
 if __name__ == '__main__':
     
     baudrate = 115200 #固定
+    
     Test = TestOperation()
-    Ser= Test.select_port()
-
+    
     #コメントアウトを一つずつ外して結果を確認してください．
 #     Test.D_Command() #「D001」とデータが表示されれば正常
-#     Test.R_Command() #「!001,01EC,01E9」のようにデータが表示されれば正常
+    Test.R_Command() #「!001,01EC,01E9」のようにデータが表示されれば正常
     
-    result = Ser.readline()
+    result = Test.ser_port.readline()
     result_disp = result.strip().decode('UTF-8')
     print(result_disp)
