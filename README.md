@@ -1,5 +1,7 @@
 # Handrail-sensor
 
+python3.8.3を使用
+
 <h2>AnalysisSystem.py</h2>
 半リアルタイム半自動分析？ビジュアライズ？スクリプトです。(一応動くが見た目微妙)
 
