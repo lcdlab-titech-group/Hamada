@@ -104,7 +104,7 @@ if __name__ == '__main__':
     saveDir = r"C:\Users\MOE HAMADA\Documents\pyscripts_402"
     arguments = sys.argv
     
-     debugFlag = False
+    debugFlag = False
     if len(arguments) > 1:
         if arguments[1] == "-v":
             debugFlag = True 
