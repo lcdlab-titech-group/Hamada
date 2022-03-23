@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from serial.tools import list_ports
 import sys
+import matplotlib.patches as patches
+import math
 
 class serialCom():
     
@@ -47,8 +49,9 @@ class serialCom():
         t = [0] * 100
         y1 = [500] * 100
         y2 = [500] * 100
-        li_L, = ax.plot(t, y1, linewidth = 3, label = "Longitudinal-axis")
-        li_V, = ax.plot(t, y2, linewidth = 3, label = "Vertical-axis")
+       
+        li_L, = ax.plot(t, y1, linewidth = 3, label = "Sensor1")
+        li_V, = ax.plot(t, y2, linewidth = 3, label = "Sensor2")
         plt.ylim(800, 1200)
         plt.xlabel("Time [s]")
         plt.ylabel("Sensor data [-]")
@@ -56,20 +59,18 @@ class serialCom():
         plt.legend()
         while not self.stop_event.is_set():
             Time += .1
-           
-            readdata = self.ser.readline()#センサ1の2軸センサ値を読み込む
+            
+            readdata = self.ser_port.readline()#センサ1の2軸センサ値を読み込む
             data = readdata.strip().decode('utf-8').replace("!", "").split(",")
+            
             Sensor1_x = int(data[1], base=16)
             Sensor1_y = int(data[2], base=16)
 
-            readdata = self.ser.readline()#センサ2の2軸センサ値を読み込む
+            readdata = self.ser_port.readline()#センサ2の2軸センサ値を読み込む
             data = readdata.strip().decode('utf-8').replace("!", "").split(",")
             Sensor2_x = int(data[1], base=16)
             Sensor2_y = int(data[2], base=16)
-
-#                 X = Sensor1_x + Sensor2_x
-#                 Y = Sensor1_y + Sensor2_y
-
+            
             t.append(Time)#末尾に足して
             t.pop(0)#最初を消す
             y1.append(Sensor1_y)
@@ -92,9 +93,9 @@ class serialCom():
     def stop(self):
         self.stop_event.set()
         self.recvT.join()
-        self.ser.write(b"Q\r")
+        self.ser_port.write(b"Q\r")
         print("Thread STOPED")
-        self.ser.close()
+        self.ser_port.close()
         #exit()
     
 if __name__ == '__main__':
@@ -119,6 +120,8 @@ if __name__ == '__main__':
     S_Num = int(S_Cmd[1:4])
     com.ser_port.write(bytes(S_Cmd,"utf-8"))
     print("Cmd:",S_Cmd)
+    com.ser.write(bytes(V_Cmd,"utf-8"))
+    com.ser.write(b"Q\r")
     com.ser_port.write(b"E\r")#E-Command
     
     while True:
