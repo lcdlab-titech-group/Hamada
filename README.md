@@ -1,4 +1,4 @@
-# Handrail-sensor
+# 402手すりセンサに使えるコード
 
 python3.8.3を使用
 
