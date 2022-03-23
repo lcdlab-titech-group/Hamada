@@ -14,6 +14,9 @@ config.iniはこのスクリプトの設定ファイル
 「python getSensorData_402.py」でデータ取得（取得値は表示されない）
 
 「python getSensorData_402.py -v」でデバッグモードになり取得値をリアルタイム表示
+
+<h2>grip_vel.py</h2>
+負荷の向きをリアルタイム描画し、2回以上の負荷を検出したとき速度を算出する簡易スクリプト
   
 <h2>TestOperation.py</h2>
 402手すりセンサでデバッグコマンドを手軽に試す用スクリプト
