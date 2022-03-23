@@ -133,6 +133,8 @@ if __name__ == '__main__':
     S_Num = int(S_Cmd[1:4])
     com.ser_port.write(bytes(S_Cmd,"utf-8"))
     print("Cmd:",S_Cmd)
+    com.ser.write(bytes(V_Cmd,"utf-8"))
+    com.ser.write(b"Q\r")
     com.ser_port.write(b"E\r")
     print("E-command")
     while True:
